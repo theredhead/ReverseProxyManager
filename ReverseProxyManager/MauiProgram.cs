@@ -28,7 +28,7 @@ namespace ReverseProxyManager
 			Routing.RegisterRoute(nameof(ProxiesListPage), typeof(ProxiesListPage));
 			Routing.RegisterRoute(nameof(ProxyDetailPage), typeof(ProxyDetailPage));
 
-
+			
 			return builder.Build();
 		}
 	}

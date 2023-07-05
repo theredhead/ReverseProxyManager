@@ -1,21 +1,21 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.ObjectModel;
+using System.Text.Json;
+using ReverseProxyManager.Pages;
 
 namespace ReverseProxyManager.ViewModels
 {
-	public class ReverseProxiesViewModel : BaseViewModel
-	{
-        ReverseProxy selectedProxy;
+    public class ReverseProxiesViewModel : BaseViewModel
+    {
+        private ReverseProxy selectedProxy;
         public ReverseProxy SelectedProxy { get => selectedProxy; set => SetField(ref selectedProxy, value); }
         
-
-        ObservableCollection<ReverseProxy> proxies = new ObservableCollection<ReverseProxy>();
+        private ObservableCollection<ReverseProxy> proxies = new ObservableCollection<ReverseProxy>();
         public ObservableCollection<ReverseProxy> Proxies { get => proxies; set => SetField(ref proxies, value); }
 
         public ReverseProxiesViewModel()
 		{
-            InitForTesting();
             Console.WriteLine($"Have {proxies.Count()} ReverseProxy instances stored.");
         }
 
@@ -70,6 +70,46 @@ namespace ReverseProxyManager.ViewModels
                 InternalUrl = "wp.theredhead.local",
                 ExternalUrl = "blog.theredhead.nl"
             });
+            SaveToFile();
+        }
+
+        internal void CreateAndEditNewProxy()
+        {
+            var proxy = new ReverseProxy();
+            Proxies.Add(proxy);
+            SelectedProxy = proxy;
+            Shell.Current.GoToAsync(nameof(ProxyDetailPage));
+
+        }
+
+        internal void LoadFromFile()
+        {
+            try {
+                var path = Path.Combine(FileSystem.AppDataDirectory, "proxies.json");
+                var json = File.ReadAllText(path);
+                var items = JsonSerializer.Deserialize<ReverseProxy[]>(json);
+                foreach( var item in items) {
+                    proxies.Add(item);
+                }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+        internal void SaveToFile()
+        {
+            try
+            {
+                var path = Path.Combine(FileSystem.AppDataDirectory, "proxies.json");
+                var json = JsonSerializer.Serialize(proxies);
+                File.WriteAllText(path, json);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
     }
 }

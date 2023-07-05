@@ -62,10 +62,12 @@
 	  <None Remove="Resources\Icons\plus.svg" />
 	  <None Remove="ViewModels\" />
 	  <None Remove="Pages\" />
+	  <None Remove="Views\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Resources\Icons\" />
 	  <Folder Include="ViewModels\" />
 	  <Folder Include="Pages\" />
+	  <Folder Include="Views\" />
 	</ItemGroup>
 </Project>

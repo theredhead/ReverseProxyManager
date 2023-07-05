@@ -2,32 +2,32 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:ReverseProxyManager"
+             xmlns:views="clr-namespace:ReverseProxyManager.Views"
              x:Class="ReverseProxyManager.Pages.ProxiesListPage"
              Title="Reverse Proxies">
 
-
-        <Grid RowDefinitions="48, *, 48, 20">
+        <Grid Margin="10" RowDefinitions="48, *, 48">
 
             <HorizontalStackLayout Grid.Row="0">
-
-                <Label TextColor="AliceBlue" BackgroundColor="Gray" Text="Hello "></Label>
-                <Label TextColor="AliceBlue" BackgroundColor="Gray" Text="World!"></Label>
-
+                <Label Text="Hello "></Label>
+                <Label Text="World!"></Label>
             </HorizontalStackLayout>
-
-            <CollectionView Grid.Row="1" 
+            <CollectionView
+                Grid.Row="1"
                 ItemsSource="{Binding Proxies}"
-                Background="Transparent"
                 SelectionMode="Single"
                 SelectionChanged="Proxies_SelectionChanged"
                 EmptyView="No items to display">
-
+                <CollectionView.Behaviors>
+                    <views:FixHeightBehavior />
+            </CollectionView.Behaviors>
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="local:ReverseProxy">
-                        <Grid Padding="10" RowDefinitions="*,*" ColumnDefinitions="*">
+                        <Grid Padding="10" RowDefinitions="*,*" ColumnDefinitions="40, *">
 
-                            <Label Grid.Row="0" Grid.Column="0" Text="{Binding Path=Name}" />
-                            <Label Grid.Row="1" Grid.Column="0" Text="{Binding Path=Name}" />
+                            <Image Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Source="dotnet_bot.png" HeightRequest="32" WidthRequest="32"/>
+                            <Label Grid.Row="0" Grid.Column="1" Text="{Binding Path=Name}" FontSize="Default"/>
+                            <Label Grid.Row="1" Grid.Column="1" Text="{Binding Path=Description}" FontSize="Small"/>
 
                         </Grid>
                     </DataTemplate>
@@ -35,14 +35,9 @@
 
             </CollectionView>
 
-            <Grid Grid.Row="2">
-                <HorizontalStackLayout Padding="5">
+            <HorizontalStackLayout Grid.Row="2" Padding="5" >
+                <Button Clicked="AddReverseProxyButton_Clicked" Text="Add…"></Button>
+            </HorizontalStackLayout>
 
-                    <Button Clicked="AddReverseProxyButton_Clicked" Text="Add…"></Button>
-
-                </HorizontalStackLayout>
-            </Grid>
         </Grid>
-
-
 </ContentPage>

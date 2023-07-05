@@ -6,6 +6,7 @@
              xmlns:viewmodels="clr-namespace:ReverseProxyManager.ViewModels"
              x:DataType="viewmodels:ReverseProxiesViewModel"
              Title="ProxyDetailPage">
+
     <VerticalStackLayout>
         <Grid Padding="10" ColumnDefinitions="150,*" VerticalOptions="Center">
             
@@ -32,4 +33,5 @@
 
         </Grid> 
     </VerticalStackLayout>
+
 </ContentPage>

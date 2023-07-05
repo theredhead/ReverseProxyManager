@@ -26,9 +26,7 @@ namespace ReverseProxyManager.Pages
 
         void AddReverseProxyButton_Clicked(object sender, EventArgs e)
         {
-            var proxy = new ReverseProxy();
-            ViewModel.SelectedProxy = proxy;
-            Shell.Current.GoToAsync(nameof(ProxyDetailPage));
+            ViewModel.CreateAndEditNewProxy();
         }
 
         void Proxies_SelectionChanged(object sender, SelectionChangedEventArgs e)
