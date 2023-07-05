@@ -31,7 +31,13 @@
             <Label Grid.Column="0" Text="External URL" VerticalTextAlignment="Center" />
             <Entry Grid.Column="1" Text="{Binding SelectedProxy.ExternalUrl}" />
 
-        </Grid> 
+        </Grid>
+        <HorizontalStackLayout>
+
+            <Button BackgroundColor="red" Text="Delete" Clicked="DeleteButton_Clicked" TextColor="White"></Button>
+
+        </HorizontalStackLayout>
+
     </VerticalStackLayout>
 
 </ContentPage>

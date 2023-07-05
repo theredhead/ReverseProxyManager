@@ -82,6 +82,18 @@ namespace ReverseProxyManager.ViewModels
 
         }
 
+        internal void Remove(ReverseProxy proxy)
+        {
+            Proxies.Remove(proxy);
+        }
+
+        internal void DeleteCurrentAndPopToList() {
+            var proxy = SelectedProxy;
+            Remove(proxy);
+            SelectedProxy = null;
+            Shell.Current.GoToAsync("..");
+        }
+
         internal void LoadFromFile()
         {
             try {

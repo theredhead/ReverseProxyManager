@@ -12,6 +12,10 @@ namespace ReverseProxyManager.Pages
             BindingContext = ViewModel = vm;
         }
 
+        void DeleteButton_Clicked(object sender, EventArgs e)
+        {
+            ViewModel.DeleteCurrentAndPopToList();
+        }
     }
 }
 
